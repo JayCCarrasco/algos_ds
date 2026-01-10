@@ -18,12 +18,29 @@ size_t BinaryHeap<T, Compare>::size() const {
 template <typename T, typename Compare>
 const T& BinaryHeap<T, Compare>::top() const {
     if (empty())
-        throw std::out_of_range("Heap is empty");
+        throw std::out_of_range("Heap is empty\n");
     return heap[0];
 }
 
 template <typename T, typename Compare>
-const T& BinaryHeap<T, Compare>::sift_up(std::size_t index){
+void BinaryHeap<T, Compare>::push(const T& data){
+    heap.push_back(data);
+    sift_up(heap.size()-1);
+}
+
+
+template <typename T, typename Compare>
+void BinaryHeap<T, Compare>::pop(){
+    if (empty())
+        throw std::out_of_range("Heap is empty\n");
+    heap[0] = heap[heap.size()-1];
+    heap.pop_back();
+    if(!empty())
+        sift_down(0);
+}
+
+template <typename T, typename Compare>
+void BinaryHeap<T, Compare>::sift_up(std::size_t index){
     while(index > 0){
         std::size_t parent = (index - 1) / 2;
 
@@ -37,7 +54,7 @@ const T& BinaryHeap<T, Compare>::sift_up(std::size_t index){
 
 
 template <typename T, typename Compare>
-const T& BinaryHeap<T, Compare>::sift_down(std::size_t index){
+void BinaryHeap<T, Compare>::sift_down(std::size_t index){
     std::size_t n = heap.size();
     std::size_t right = 2 * index + 2;
     std::size_t left = 2 * index + 1;

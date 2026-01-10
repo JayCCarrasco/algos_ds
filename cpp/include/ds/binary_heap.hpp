@@ -1,5 +1,6 @@
 #pragma once
 #include <cstddef>
+#include <vector>
 
 template <typename T, typename Compare = std::less<T>>
 class BinaryHeap {
