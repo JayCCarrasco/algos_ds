@@ -10,7 +10,7 @@ public:
 
     //Modification methods
     void add_edge(int u, int v);
-    //void remove_edge(int u, int v);
+    void remove_edge(int u, int v);
     //bool has_edge(int u, int v);
 
     //Verification methods

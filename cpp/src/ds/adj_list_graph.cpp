@@ -1,6 +1,7 @@
 #include "ds/adj_list_graph.hpp"
 #include "ds/queue.hpp"
 #include <iostream>
+#include <algorithm>
 
 //Constructor
 Adj_List_Graph::Adj_List_Graph(size_t n, bool directed) :
@@ -8,7 +9,7 @@ Adj_List_Graph::Adj_List_Graph(size_t n, bool directed) :
     std::cout<<"Adjacency list created" << '\n';
 }
 
-    //Modification methods
+//Modification methods
 void Adj_List_Graph::add_edge(int u, int v){
     adj[u].push_back(v);
     if (!directed_) {
@@ -16,6 +17,19 @@ void Adj_List_Graph::add_edge(int u, int v){
     }
 }
 
+void Adj_List_Graph::remove_edge(int u, int v){
+    auto it = std::find(adj[u].begin(), adj[u].end(), v);
+    if(it != adj[u].end()){
+        adj[u].erase(it);
+    }
+
+    if(!directed_){
+        it = std::find(adj[v].begin(), adj[v].end(), u);
+        if(it != adj[v].end()){
+            adj[v].erase(it);
+        }
+    }
+}
 
 //Verification methods
 std::size_t Adj_List_Graph::num_vertices(){

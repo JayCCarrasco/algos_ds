@@ -15,4 +15,12 @@ int main() {
 
     std::cout << "DFS desde 0: ";
     g.dfs(0);
+
+    g.remove_edge(1, 2);
+
+    std::cout << "BFS desde 0: ";
+    g.bfs(0);
+
+    std::cout << "DFS desde 0: ";
+    g.dfs(0);
 }
